@@ -1,11 +1,11 @@
 package com.pokemon
-import com.pokemon.services.AOEAsyncServiceOnHttp
+import com.pokemon.services.PokeAsyncServiceHttp
 import monix.execution.Scheduler.Implicits.global
 
 object Pokedex {
 
   def main(args: Array[String]): Unit =
-    val aoeSvc = new AOEAsyncServiceOnHttp(http = new AsyncHttp)
+    val aoeSvc = new PokeAsyncServiceHttp(http = new AsyncHttp)
     /*
     ----- GET -> Le pokemon avec le nom bulbasaur
        aoeSvc.getPokemon("bulbasaur")

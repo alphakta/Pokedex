@@ -6,15 +6,14 @@ import spray.json._
 import DefaultJsonProtocol._
 import com.pokemon.AsyncHttp
 
-
-trait AOEAsyncService {
+trait PokeAsyncService {
   def getPokemon(name: String): Task[String]
   def getPokemonLocation(name: String): Task[String]
   def getPokemonByType(typePoke: String): Task[String]
   def getPokemonByGeneration(generation: String): Task[String]
 }
 
-class AOEAsyncServiceOnHttp(http: AsyncHttp) extends AOEAsyncService {
+class PokeAsyncServiceHttp(http: AsyncHttp) extends PokeAsyncService {
 
   def getPokemon(name: String): Task[String] =
     http.get("https://pokeapi.co/api/v2/pokemon/"+name+"/")
@@ -28,9 +27,6 @@ class AOEAsyncServiceOnHttp(http: AsyncHttp) extends AOEAsyncService {
         .map(content => content
         .parseJson
         .toString
-        // .convertTo[Seq[PokemonLocation]]
-        // .asJsObject
-        // .convertTo[Seq[PokemonLocation]]
       )
 
   def getPokemonByType(typePoke: String): Task[String] =
